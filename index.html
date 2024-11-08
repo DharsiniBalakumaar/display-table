@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating tables dynamically</title>
+    <style>
+        #contact-table-container.box{
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        body{
+            background-color: #FFF8DE;
+        }
+        table {
+            width: 100%;
+            height: 50vh;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+            background-color:#C5D3E8;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        td:hover{
+            background-color:blanchedalmond;
+        }
+        th:hover{
+            background-color: beige;
+        }
+    </style>
+</head>
+<body>
+   <h2>CONTACT LIST</h2> 
+   <div id="contact-table-container"></div>
+   <script>
+        const contact=[
+            { firstName:'Sri', lastName:'Kumaran', email:'sri@gmail.com'},
+            { firstName: 'John', lastName: 'Doe', email: 'john.doe@gmail.com' },
+            { firstName: 'Jane', lastName: 'Smith', email: 'jane.smith@yahoo.com'}
+        ]
+        function createTable()
+        {
+            const tableContainer = document.getElementById("contact-table-container");
+            const table = document.createElement("table");
+            const thead = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            const headers = ['First Name','Last Name','Email'];
+            headers.forEach(headerText=>{
+                const th = document.createElement("th");
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            })
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            const tbody = document.createElement("tbody");
+            contact.forEach(contacts=>{
+                const row = document.createElement("tr");
+                const firstCell = document.createElement("td");
+                firstCell.textContent = contacts.firstName;
+                row.appendChild(firstCell);
+
+                const lastCell = document.createElement("td");
+                lastCell.textContent = contacts.lastName;
+                row.appendChild(lastCell);
+
+                const emailCell = document.createElement("td");
+                emailCell.textContent = contacts.email;
+                row.appendChild(emailCell);  
+
+                tbody.appendChild(row);
+            })
+            table.appendChild(tbody);
+            tableContainer.appendChild(table);
+        }
+        createTable();
+   </script>
+</body>
+</html>
